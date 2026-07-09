@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LindaKukuOS </title>
+    <title>LindaKukuOS</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a3c2a'/%3E%3Cellipse cx='16' cy='19' rx='6' ry='8' fill='%23e8a317'/%3E%3C/svg%3E">
-    <!-- Google Font (Inter) for a clean, modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
@@ -32,7 +31,6 @@
             color: #1e2b26;
         }
 
-        /* ----- Card / Section Container ----- */
         .landing-section {
             max-width: 820px;
             width: 100%;
@@ -78,7 +76,6 @@
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
-            /* 16:9 ratio */
             border-radius: 20px;
             overflow: hidden;
             background: #0e1a15;
@@ -96,7 +93,7 @@
             display: block;
         }
 
-        /* ----- Video Caption / Context ----- */
+        /* ----- Video Caption ----- */
         .video-caption {
             display: flex;
             align-items: flex-start;
@@ -129,37 +126,47 @@
             color: #1e2b26;
         }
 
-        /* ----- Value Proposition (short) ----- */
-        .value-prop {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem 2.5rem;
-            background: #f3f6f4;
-            padding: 1.25rem 1.5rem;
-            border-radius: 60px;
+        /* ===== NEW: 6 VALUE PROPOSITIONS (grid) ===== */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
             margin-bottom: 2rem;
-            border: 1px solid #e2e9e5;
+            padding: 1rem 0;
+            border-top: 1px solid #eef3f0;
+            border-bottom: 1px solid #eef3f0;
         }
 
         .value-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1e2b26;
+            text-align: center;
+            gap: 0.4rem;
         }
 
         .value-item svg {
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             stroke: #1e4d3a;
             fill: none;
-            stroke-width: 2.2;
+            stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
             flex-shrink: 0;
+        }
+
+        .value-item .title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e2b26;
+        }
+
+        .value-item .desc {
+            font-size: 0.78rem;
+            color: #6b7f77;
+            line-height: 1.4;
+            max-width: 180px;
         }
 
         /* ----- CTA Row ----- */
@@ -183,7 +190,7 @@
             color: #1e2b26;
         }
 
-        /* ----- BUTTON with enhanced animations ----- */
+        /* ----- Button with animations ----- */
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -206,7 +213,6 @@
             box-shadow: 0 4px 14px rgba(30, 77, 58, 0.25);
         }
 
-        /* Pseudo-element for shine animation */
         .btn-primary::after {
             content: '';
             position: absolute;
@@ -271,6 +277,17 @@
         }
 
         /* ----- Responsive ----- */
+        @media (max-width: 700px) {
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .value-item .desc {
+                max-width: 100%;
+            }
+        }
+
         @media (max-width: 640px) {
             .landing-section {
                 padding: 1.5rem 1.25rem 2rem;
@@ -290,16 +307,22 @@
                 font-size: 0.75rem;
             }
 
-            .value-prop {
-                flex-direction: column;
-                align-items: center;
+            .value-grid {
+                grid-template-columns: 1fr;
                 gap: 0.75rem;
-                border-radius: 32px;
-                padding: 1rem 1.25rem;
+                padding: 0.75rem 0;
             }
 
             .value-item {
-                font-size: 0.85rem;
+                flex-direction: row;
+                text-align: left;
+                gap: 0.6rem;
+                align-items: center;
+            }
+
+            .value-item .desc {
+                max-width: 100%;
+                font-size: 0.75rem;
             }
 
             .cta-row {
@@ -353,23 +376,23 @@
 </head>
 <body>
     <script>
-  document.addEventListener('contextmenu', e => e.preventDefault());
-  document.addEventListener('keydown', e => {
-    const kb = (e.ctrlKey || e.metaKey) && ['c','u','s','a','p','x'].includes(e.key.toLowerCase());
-    const dt = e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()));
-    if (kb || dt) e.preventDefault();
-  });
-  document.addEventListener('dragstart', e => e.preventDefault());
-  document.addEventListener('selectstart', e => e.preventDefault());
-  (function devDetect() {
-    const threshold = 400;
-    setInterval(() => {
-      if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-        document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:0.85rem;color:#6b6560;">Please refresh the page to continue.</div>';
-      }
-    }, 1200);
-  })();
-</script>
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const kb = (e.ctrlKey || e.metaKey) && ['c', 'u', 's', 'a', 'p', 'x'].includes(e.key.toLowerCase());
+            const dt = e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()));
+            if (kb || dt) e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        (function devDetect() {
+            const threshold = 400;
+            setInterval(() => {
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:0.85rem;color:#6b6560;">Please refresh the page to continue.</div>';
+                }
+            }, 1200);
+        })();
+    </script>
 
     <section class="landing-section" aria-label="Video sales letter and call to action">
 
@@ -395,7 +418,6 @@
 
     <!-- ====== VIDEO CAPTION ====== -->
     <div class="video-caption">
-        <!-- Professional SVG: play / info icon -->
         <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
             <polygon points="10,8 16,12 10,16 10,8" />
@@ -406,28 +428,64 @@
         </p>
     </div>
 
-    <!-- ====== SHORT VALUE PROPOSITION ====== -->
-    <div class="value-prop">
+    <!-- ====== 6 VALUE PROPOSITIONS (grid) ====== -->
+    <div class="value-grid">
+        <!-- 1 -->
         <div class="value-item">
             <svg viewBox="0 0 24 24">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <polyline points="9 12 11 14 15 10" />
             </svg>
-            <span>Data-driven flock management</span>
+            <span class="title">Smart Flock Monitoring</span>
+            <span class="desc">Real‑time health and behavior tracking for every bird.</span>
         </div>
+        <!-- 2 -->
         <div class="value-item">
             <svg viewBox="0 0 24 24">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
             </svg>
-            <span>End-to-end operational control</span>
+            <span class="title">Feed Optimization</span>
+            <span class="desc">Reduce waste with precise, data‑driven feeding schedules.</span>
         </div>
+        <!-- 3 -->
         <div class="value-item">
             <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
             </svg>
-            <span>Real-time growth analytics</span>
+            <span class="title">Growth Analytics</span>
+            <span class="desc">Track weight gain and feed conversion rates effortlessly.</span>
+        </div>
+        <!-- 4 -->
+        <div class="value-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="title">Automated Alerts</span>
+            <span class="desc">Get instant notifications for critical events and anomalies.</span>
+        </div>
+        <!-- 5 -->
+        <div class="value-item">
+            <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="18" rx="2" ry="2" />
+                <line x1="12" y1="9" x2="12" y2="15" />
+                <line x1="9" y1="12" x2="15" y2="12" />
+            </svg>
+            <span class="title">Inventory Management</span>
+            <span class="desc">Manage feed, medications and supplies with ease.</span>
+        </div>
+        <!-- 6 -->
+        <div class="value-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M21 12v-2a5 5 0 0 0-5-5H8a5 5 0 0 0-5 5v2" />
+                <circle cx="12" cy="16" r="5" />
+                <path d="M12 11v5" />
+                <path d="M9 16l3-3 3 3" />
+            </svg>
+            <span class="title">Reporting & Insights</span>
+            <span class="desc">Generate actionable reports to make smarter decisions.</span>
         </div>
     </div>
 
@@ -438,7 +496,6 @@
             &nbsp;Talk to our team today.
         </div>
 
-        <!-- "Let's Talk" Button with enhanced animations -->
         <a href="https://tumakazi.com/schedule-call" class="btn-primary" role="button">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M22 2L11 13" />
